@@ -1,0 +1,24 @@
+========================================================================
+    Changelog INO Arduino Robot
+========================================================================
+V1.0.0
+Initial version, obstacle detection and motors are working on a very
+basic level. No obstacle detection while moving.
+
+V1.0.5
+Improved maneuverability
+
+V1.0.6
+Speaker and Obstacle sound alert added. Sensor now detects obstacles in
+5 directions.
+
+V1.0.7
+Obstacle avoidance if approaching wall diagonally (Beta) Calibration of
+motors for straight movement.
+
+V1.0.8
+Obstacle avoidance if approaching wall diagonally.
+
+V1.0.9 (Alpha 1)
+Microswitch is attached and code is working (some minor bugs though)
+Fixed bug where the robot turns during startup.
