@@ -1,0 +1,13 @@
+
+--
+
+--
+Future changes
+Test: Scanner sweep using do-while
+
+
+-Reducing speed when obstacle is detected.
+Slowing down -> turning, instead of
+stopping -> turning.
+
+Bluetooth module for remote controlling
