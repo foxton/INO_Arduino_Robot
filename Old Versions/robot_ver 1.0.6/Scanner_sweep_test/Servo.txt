@@ -1,0 +1,4 @@
+Diagonal right: 124
+Diagonal left: 58
+right: 158
+left: 25
