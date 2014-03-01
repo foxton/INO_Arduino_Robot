@@ -3,7 +3,7 @@
 
 --
 Future changes
-Test: Scanner sweep using do-while
+Test: Scanner sweep using while-loop
 
 
 -Reducing speed when obstacle is detected.
