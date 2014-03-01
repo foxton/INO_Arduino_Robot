@@ -22,3 +22,7 @@ Obstacle avoidance if approaching wall diagonally.
 V1.0.9 (Alpha 1)
 Microswitch is attached and code is working (some minor bugs though)
 Fixed bug where the robot turns during startup.
+
+V1.0.9
+Microswitch bugs fixed.
+Added startup sound.
