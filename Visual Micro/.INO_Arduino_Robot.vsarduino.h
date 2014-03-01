@@ -1,6 +1,6 @@
 #ifndef _VSARDUINO_H_
 #define _VSARDUINO_H_
-//Board = Arduino Uno
+//Board = Arduino Nano w/ ATmega328
 #define __AVR_ATmega328P__
 #define ARDUINO 105
 #define __AVR__
@@ -50,7 +50,7 @@ void readSwitch();
 long scan();
 void playBeep(unsigned char tone);
 
-#include "C:\Program Files (x86)\Arduino\hardware\arduino\variants\standard\pins_arduino.h" 
+#include "C:\Program Files (x86)\Arduino\hardware\arduino\variants\eightanaloginputs\pins_arduino.h" 
 #include "C:\Program Files (x86)\Arduino\hardware\arduino\cores\arduino\arduino.h"
 #include "G:\Arduino Projects\INO_Arduino_Robot\INO_Arduino_Robot.ino"
 #endif
