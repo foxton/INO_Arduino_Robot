@@ -1,7 +1,9 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "INO_Arduino_Robot", "INO_Arduino_Robot.vcxproj", "{30256249-6EAC-4D59-99F9-8F064AC4591C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Auto_watering_system", "..\Auto_watering_system\Auto_watering_system.vcxproj", "{22066168-7590-4243-90E5-76A490EA6A4F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +15,10 @@ Global
 		{30256249-6EAC-4D59-99F9-8F064AC4591C}.Debug|Win32.Build.0 = Debug|Win32
 		{30256249-6EAC-4D59-99F9-8F064AC4591C}.Release|Win32.ActiveCfg = Release|Win32
 		{30256249-6EAC-4D59-99F9-8F064AC4591C}.Release|Win32.Build.0 = Release|Win32
+		{22066168-7590-4243-90E5-76A490EA6A4F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{22066168-7590-4243-90E5-76A490EA6A4F}.Debug|Win32.Build.0 = Debug|Win32
+		{22066168-7590-4243-90E5-76A490EA6A4F}.Release|Win32.ActiveCfg = Release|Win32
+		{22066168-7590-4243-90E5-76A490EA6A4F}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
