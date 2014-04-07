@@ -5,6 +5,8 @@
 Future changes
 Test: Scanner sweep using while-loop
 
+Add interupt on microswitch pin for faster
+detection
 
 -Reducing speed when obstacle is detected.
 Slowing down -> turning, instead of
