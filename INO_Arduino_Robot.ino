@@ -23,8 +23,6 @@ void setup()
  pinMode(switchPin, INPUT);
  pinMode(speakerPin, OUTPUT);
  lookForward();
- playBeep(200);
- playBeep(250);
  frontdistance = scan();
 readSwitch();
 //Serial.begin(9600); //For debugging
@@ -378,10 +376,4 @@ long scan() //Scan function that returns long
 }
 
 
-void playBeep(unsigned char tone)
-{
-  analogWrite(11, tone);      // Almost any value can be used except 0 and 255                        // experiment to get the best tone
-  delay(100);          // wait for a delayms ms
-  analogWrite(11, 0);       // 0 turns it off
-  delay(100);          // wait for a delayms ms   	
-}
+
