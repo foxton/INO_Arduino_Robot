@@ -1,201 +1,67 @@
 // INO ARDUINO ROBOT
-// Version: 1.0.9
+// Version: 1.1.0
 //Programmer: FoxtoN
 
+/*Include Libraries*/
 #include <Servo.h>
+
+/*Declarations*/
 #define echoPin 7 // Echo Pin
 #define trigPin 8 // Trigger Pin
 long duration, leftdistance, rightdistance, diagonalLdistance, diagonalRdistance, frontdistance, distance; // Duration used to calculate distance
-
 Servo left; //left motor
 Servo right; //right motor
 Servo head; // Servo "head" with ultrasonic sensor
-int switchPin = 2;
-int switchState;
+long start = 0;
+int switchPin = 3;
+volatile int switchState = 0;
 int speakerPin = 11;
+
+
+
+/*Setup Code*/
 
 void setup()
 {
- 
-  head.attach(4);
-  pinMode(trigPin, OUTPUT);
+/*Attach servo and assign inputs/outputs*/
+ head.attach(4);
+ pinMode(trigPin, OUTPUT);
  pinMode(echoPin, INPUT);
  pinMode(switchPin, INPUT);
  pinMode(speakerPin, OUTPUT);
+ pinMode(13,OUTPUT);
+
+ /* Attach the interrupt */
+ attachInterrupt(1,react,RISING);
+
+ /* Put servo in start position */
  lookForward();
- frontdistance = scan();
-readSwitch();
-//Serial.begin(9600); //For debugging
+
+	/*Serial for debugging	*/
+	//Serial.begin(9600);
 }
+
+/* LOOP	*/
+
 void loop()
 {
+	lookForward();
+	lookLeft();
+	lookRight();
+}
 
-if(switchState == HIGH)
+ 
+
+ 
+
+ /*Functions*/
+
+/*Interrupt function called when front switch changes state*/
+
+void react()
 {
- moveBackward();
- delay(400);
- moveStop();
- lookLeft();
- leftdistance = scan();
- lookRight();
- rightdistance = scan();
- lookForward();
- if ( leftdistance < rightdistance)
-    {
- moveBackward();
- delay(600);
- moveRight();
- delay(325);
- frontdistance = scan();
- readSwitch();
-
-     }
- else
- {
-   moveBackward();
-   delay(600);
-   moveLeft();
-   delay(365);
-  frontdistance = scan();
-  readSwitch();
+	digitalWrite(13,HIGH);
 }
-}
-else
-{
-
-if((frontdistance > 60) || (frontdistance == 0 )) //If no obstacle ahead, move forward
-{
-	readSwitch();
-   moveForward();
-   lookdiagonalL();
-   diagonalLdistance = scan();
-   checkdiagonalL();        //If approaching wall(side) turn slightly in opposite direction
-   readSwitch();
-   lookLeft();
-   leftdistance = scan();
-   checkLeft(); //If approaching wall(side) turn slightly in opposite direction
-   readSwitch();
-   lookForward();
-   frontdistance = scan();
-   readSwitch();
-
-   if(switchState == HIGH)  //
-{
- moveBackward();
- delay(400);
- moveStop();
- lookLeft();
- leftdistance = scan();
- lookRight();
- rightdistance = scan();
- lookForward();
- if ( leftdistance < rightdistance)
-    {
- moveBackward();
- delay(600);
- moveRight();
- delay(325);
- frontdistance = scan();
- readSwitch();
-
-     }
- else
- {
-   moveBackward();
-   delay(600);
-   moveLeft();
-   delay(365);
-  frontdistance = scan();
-  readSwitch();
-}
-}
-else
-{                     
-
-   if((frontdistance > 60) || (frontdistance == 0)) //If no obstacle ahead, move forward
-   {
-   readSwitch();
-   moveForward();
-   lookdiagonalR();
-   diagonalRdistance = scan();
-   checkdiagonalR();        //If approaching wall(side) turn slightly in opposite direction
-   readSwitch();
-   lookRight();
-   rightdistance = scan();
-   checkRight(); //If approaching wall(side) turn slightly in opposite direction
-   readSwitch();
-   }
-   else //When approaching wall (Front) (Look left -> look forward -> ping
-    {
-
- moveStop();
- lookLeft();
- leftdistance = scan();
- lookRight();
- rightdistance = scan();
- lookForward();
- if ( leftdistance < rightdistance)
-    {
- moveBackward();
- delay(600);
- moveRight();
- delay(325);
- frontdistance = scan();
-
-     }
- else
- {
-   moveBackward();
-   delay(600);
-   moveLeft();
-   delay(365);
-  frontdistance = scan();
-  readSwitch();
- }
- 
-
- }
-   lookForward();
-   frontdistance = scan();
- }
-}
- else //When approaching wall (Front) (look right -> look forward -> ping)
- {
-
- moveStop();
- lookLeft();
- leftdistance = scan();
- lookRight();
- rightdistance = scan();
- lookForward();
- 
-if ( leftdistance < rightdistance)
- {
- moveBackward();
- delay(600);
- moveRight();
- delay(685);
- frontdistance = scan();
- readSwitch();
- }
- else
- {
-   moveBackward();
-   delay(600);
-   moveLeft();
-   delay(735);
-  frontdistance = scan();
- }
- }
- 
- }
- }
- 
-
- 
-
-
-
 
 void moveForward()
 {
@@ -264,90 +130,43 @@ void moveRight()
 void lookForward()
 {
 	 head.write(93);
-        delay(400);
+        delay(20);
 }
 
-void lookdiagonalL()
-{
-        head.write(58);
-        delay(400);
-}
 
 void lookLeft()
 {
-        head.write(25);
-        delay(400);
+  for(int i = 93; i>=26; i-=1)
+  {
+        head.write(i);
+	//	scan(i);
+        delay(20);
+  }
+   for(int i = 25; i<=92; i+=1)
+  {
+        head.write(i);
+		//scan(i);
+        delay(20);
+  }
+
 }
 
-void lookdiagonalR()
-{
-        head.write(124);
-        delay(400);
-}
 
 void lookRight()
 {
-        head.write(158);
-        delay(400);
-}
-
-void checkdiagonalL()
-{
- if((diagonalLdistance < 40) && (diagonalLdistance != 0)) //If approaching wall(side) move in opposite direction
+  for(int i = 93; i <= 157; i+=1)
   {
-     stopRight();
-     delay(20);
+	head.write(i);
+	delay(20);
    }
-   else
-   {
-     lookLeft();
-     leftdistance = scan();
-   }
-}
-
-void checkLeft()
-{
- if((leftdistance < 40) && (leftdistance != 0)) //If approaching wall(side) move in opposite direction
+  for(int i = 158; i>=94; i-=1)
   {
-
-     stopRight();
-     delay(20);
-   }
-   else
-   {
-     lookForward();
-     frontdistance = scan();
-   }
+	head.write(i);
+	delay(20);
+  }
 }
 
-void checkdiagonalR()
-{
- if((diagonalRdistance < 40) && (diagonalRdistance != 0)) //If approaching wall(side) move in opposite direction
-  {
 
-     stopLeft();
-     delay(20);
-   }
-   else
-   {
-     lookRight();
-     rightdistance = scan();
-   }
-}
-
-void checkRight()
-{
-  if ((rightdistance < 40) && (rightdistance != 0)) //If approaching wall(side) move in opposite direction
-   {
-   stopLeft();
-   delay(20);
-   }
-   else
-   {
-     lookForward();
-     frontdistance = scan();
-   }
-}
 
 void checkFront()
 {
@@ -360,7 +179,7 @@ switchState = digitalRead(switchPin);
 delay(10);
 }
 
-long scan() //Scan function that returns long
+long scan(int servonumber) //Scan function that returns long
 {
    digitalWrite(trigPin, LOW);
  delayMicroseconds(2);
@@ -373,6 +192,7 @@ long scan() //Scan function that returns long
  
  //Calculate the distance (in cm) based on the speed of sound.
  distance = duration/58.2;
+ return distance;
 }
 
 
